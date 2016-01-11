@@ -1,0 +1,32 @@
+# Eclipse 
+.classpath
+.project
+.settings/
+ 
+# maven
+/*/target/
+target/
+ 
+# build files
+/*/build/
+/buildassets/map_*.txt
+/*/bin/
+/*/dist/
+/*/manifest.mf
+/release
+ 
+# Mac filesystem dust
+.DS_Store
+ 
+/bin/
+/bin/
+/target/
+/target/
+/bin/
+/target/
+/bin/
+/target/
+/bin/
+/target/
+/bin/
+/target/
