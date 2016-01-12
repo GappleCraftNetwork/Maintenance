@@ -53,7 +53,7 @@ public class MaintenanceListener implements Listener{
 	public void onPreLogin(PlayerPreLoginEvent e){
 		String name = e.getName();
 		if(maintenance.dev && !PermissionsEx.getUser(e.getName()).has("gapple.dev") && !Bukkit.getOfflinePlayer(name).isWhitelisted()){
-			e.disallow(Result.KICK_OTHER, "\n"+tag+ChatColor.RED+"The server is currently in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode. We will be back soon. "+ChatColor.GRAY+"Check "+ChatColor.YELLOW+"www.gapplecraft.net"+ChatColor.GRAY+" for the latest updates.");
+			e.disallow(Result.KICK_OTHER, "\n"+tag+ChatColor.RED+"The server is currently in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode. We will be back soon. \n"+ChatColor.GRAY+"Check "+ChatColor.YELLOW+"www.gapplecraft.net"+ChatColor.GRAY+" for the latest updates.");
 		}
 	}
 	
