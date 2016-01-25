@@ -34,7 +34,7 @@ public class MessagingChannel implements PluginMessageListener{
 	 */
 	@Override
 	public void onPluginMessageReceived(String channel, Player player, byte[] message) {
-		if (!channel.equals("BungeeCord")) {
+		if (channel.equals("BungeeCord")) {
 			ByteArrayDataInput in = ByteStreams.newDataInput(message);
 		    String subchannel = in.readUTF();
 		    if (subchannel.equals("GetServer")) {
