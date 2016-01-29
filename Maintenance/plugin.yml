@@ -9,10 +9,7 @@ commands:
       description: Shows players our server website.
       usage: /<command>
       aliases: [dev, devmode]
-   setservername:
-      description: Sets the server name;
-      usage: /<command>
-
+      
 permissions:
   gapple.dev:
     description: Allows the player to toggle maintenance mode.
