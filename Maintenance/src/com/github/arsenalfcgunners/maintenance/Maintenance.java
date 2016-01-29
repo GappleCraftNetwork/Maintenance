@@ -48,11 +48,11 @@ public class Maintenance extends JavaPlugin{
 		if(config.getString("server") != null){
 			server = config.getString("server");
 		}
+		
 		else{
 			List<Player> online = new ArrayList<Player>(Bukkit.getOnlinePlayers());
 			if(online.size() != 0){
 				mc.getServerName(online.get(0));
-				saveConfig(config, file);
 			}
 		}
 		
@@ -154,6 +154,7 @@ public class Maintenance extends JavaPlugin{
 	 */
 	public void setServerName(String sn){
 		server = sn;
+		config.set("server", server);
 		saveConfig(config, file);
 	}
 }
