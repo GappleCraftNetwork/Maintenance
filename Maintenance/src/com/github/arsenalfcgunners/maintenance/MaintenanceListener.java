@@ -21,8 +21,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
  */
 @SuppressWarnings("deprecation")
 public class MaintenanceListener implements Listener{
-	Maintenance maintenance;
-	String tag = ChatColor.GRAY+"["+ChatColor.GOLD+"GappleCraft"+ChatColor.GRAY+"] ";
+	private Maintenance maintenance;
 	
 	/** 
 	 * @param plugin The maintenance plugin.
@@ -39,8 +38,8 @@ public class MaintenanceListener implements Listener{
 	 */
 	@EventHandler(priority = EventPriority.HIGH)
 	public void playerJoin(PlayerJoinEvent e){
-		if(maintenance.dev){
-			e.getPlayer().sendMessage(tag+ChatColor.RED+"The server is currently in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode. Normal players cannot join during this time.");
+		if(maintenance.getDevStatus()){
+			e.getPlayer().sendMessage(maintenance.getTag()+ChatColor.RED+"The server is currently in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode. Normal players cannot join during this time.");
 		}
 	}
 	
@@ -52,8 +51,8 @@ public class MaintenanceListener implements Listener{
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPreLogin(PlayerPreLoginEvent e){
 		String name = e.getName();
-		if(maintenance.dev && !PermissionsEx.getUser(e.getName()).has("gapple.dev") && !Bukkit.getOfflinePlayer(name).isWhitelisted()){
-			e.disallow(Result.KICK_OTHER, tag+ChatColor.RED+"The server is currently in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode. We will be back soon. "+ChatColor.GRAY+"Check "+ChatColor.YELLOW+"www.gapplecraft.net"+ChatColor.GRAY+" for the latest updates.");
+		if(maintenance.getDevStatus() && !PermissionsEx.getUser(e.getName()).has("gapple.dev") && !Bukkit.getOfflinePlayer(name).isWhitelisted()){
+			e.disallow(Result.KICK_OTHER, maintenance.getTag()+ChatColor.RED+"The server is currently in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode. We will be back soon. "+ChatColor.GRAY+"Check "+ChatColor.YELLOW+"www.gapplecraft.net"+ChatColor.GRAY+" for the latest updates.");
 		}
 	}
 	
@@ -65,11 +64,11 @@ public class MaintenanceListener implements Listener{
 	 */
 	@EventHandler(priority = EventPriority.HIGH)
 	public void pingServer(ServerListPingEvent e){
-		if(maintenance.dev){
-			e.setMotd(tag+ChatColor.RED+"The server is in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode.\n"+ChatColor.GRAY+"Check "+ChatColor.YELLOW+"www.gapplecraft.net"+ChatColor.GRAY+" for updates.");
+		if(maintenance.getDevStatus()){
+			e.setMotd(maintenance.getTag()+ChatColor.RED+"The server is in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode.\n"+ChatColor.GRAY+"Check "+ChatColor.YELLOW+"www.gapplecraft.net"+ChatColor.GRAY+" for updates.");
 		}
 		else{
-			e.setMotd(maintenance.config.getString("motd"));
+			e.setMotd(maintenance.getConfig().getString("motd"));
 		}
 	}
 }

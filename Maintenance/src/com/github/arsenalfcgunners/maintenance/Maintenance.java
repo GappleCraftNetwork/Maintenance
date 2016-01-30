@@ -24,18 +24,20 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Both the mode of the server and the motd are stored in a yml file so they are not lost in a server restart or reload.
  */
 public class Maintenance extends JavaPlugin{
-	boolean dev = false;
-	File file;
-	YamlConfiguration config;
-	String tag = ChatColor.GRAY+"["+ChatColor.GOLD+"GappleCraft"+ChatColor.GRAY+"] ";
-	String server;
-	MessagingChannel mc;
+	private boolean dev = false;
+	private File file;
+	private YamlConfiguration config;
+	private String tag;
+	private String server;
+	private MessagingChannel mc;
 	
 	/**
 	 * Performed when the plugin is enabled.
 	 */
 	@Override
 	public void onEnable(){
+		tag = ChatColor.GRAY+"["+ChatColor.GOLD+"GappleCraft"+ChatColor.GRAY+"] ";
+		
 		file = new File(getDataFolder()+File.separator+"/config.yml");
 		config = YamlConfiguration.loadConfiguration(file);
 		
@@ -156,5 +158,32 @@ public class Maintenance extends JavaPlugin{
 		server = sn;
 		config.set("server", server);
 		saveConfig(config, file);
+	}
+	
+	/**
+	 * True if server is in dev mode, false if it is not.
+	 * 
+	 * @return Whether or not the server is in maitenance. 
+	 */
+	public boolean getDevStatus(){
+		return dev;
+	}
+	
+	/**
+	 * Gets the config.
+	 * 
+	 * @return The configuration.
+	 */
+	public FileConfiguration getConfig(){
+		return config;
+	}
+	
+	/**
+	 * Returns the chat message tag.
+	 * 
+	 * @return The string for the tag.
+	 */
+	public String getTag(){
+		return tag;
 	}
 }
