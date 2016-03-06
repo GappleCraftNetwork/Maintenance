@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerPreLoginEvent.Result;
 import org.bukkit.event.server.ServerListPingEvent;
 
-import ru.tehkode.permissions.bukkit.PermissionsEx;
+import com.github.arsenalfcgunners.gappleperms.RankManager;
 
 /**
  * 
@@ -51,7 +51,7 @@ public class MaintenanceListener implements Listener{
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPreLogin(PlayerPreLoginEvent e){
 		String name = e.getName();
-		if(maintenance.getDevStatus() && !PermissionsEx.getUser(e.getName()).has("gapple.dev") && !Bukkit.getOfflinePlayer(name).isWhitelisted()){
+		if(maintenance.getDevStatus() && RankManager.hasPermission(RankManager.getRankOfPlayer(Bukkit.getOfflinePlayer(e.getName()).getUniqueId()), "gapple.dev") == 3 && !Bukkit.getOfflinePlayer(name).isWhitelisted()){
 			e.disallow(Result.KICK_OTHER, maintenance.getTag()+ChatColor.RED+"The server is currently in "+ChatColor.YELLOW+"maintenance "+ChatColor.RED+"mode. We will be back soon. "+ChatColor.GRAY+"Check "+ChatColor.YELLOW+"www.gapplecraft.net"+ChatColor.GRAY+" for the latest updates.");
 		}
 	}
